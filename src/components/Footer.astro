@@ -1,0 +1,49 @@
+---
+import { nav, site } from '../data/site';
+const institucional = nav.find((n) => n.label === 'Institucional')?.children ?? [];
+const cursos = nav.find((n) => n.label === 'Cursos')?.children ?? [];
+---
+
+<footer class="bg-faex-ink text-white/80">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <img src={site.logo} alt="FAEX" class="mb-4 h-12 w-auto brightness-0 invert opacity-90" />
+      <p class="text-sm leading-relaxed">
+        Cursos de Graduação, Pós-Graduação e Técnicos reconhecidos pelo MEC em Extrema, Minas Gerais.
+      </p>
+      <div class="mt-5 flex gap-3 text-sm font-semibold">
+        <a href={site.social.instagram} target="_blank" rel="noopener" class="hover:text-faex-orange">Instagram</a>
+        <a href={site.social.facebook} target="_blank" rel="noopener" class="hover:text-faex-orange">Facebook</a>
+        <a href={site.social.youtube} target="_blank" rel="noopener" class="hover:text-faex-orange">YouTube</a>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="mb-4 font-bold text-faex-orange">Institucional</h3>
+      <ul class="space-y-2 text-sm">
+        {institucional.map((l) => <li><a href={l.href} class="hover:text-white">{l.label}</a></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="mb-4 font-bold text-faex-orange">Cursos</h3>
+      <ul class="space-y-2 text-sm">
+        {cursos.map((l) => <li><a href={l.href} class="hover:text-white">{l.label}</a></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="mb-4 font-bold text-faex-orange">Contato</h3>
+      <ul class="space-y-3 text-sm">
+        <li><span class="font-medium text-white/60">Endereço:</span> {site.address}</li>
+        <li><a href={site.phoneHref} class="hover:text-white">{site.phone}</a></li>
+        <li><a href={site.whatsapp} target="_blank" rel="noopener" class="hover:text-white">WhatsApp</a></li>
+        <li><a href={`mailto:${site.email}`} class="hover:text-white">{site.email}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10 py-5 text-center text-xs text-white/50">
+    © {new Date().getFullYear()} FAEX - Faculdade de Extrema ·
+    <a href="/politica-de-privacidade" class="hover:text-white">Política de Privacidade</a>
+  </div>
+</footer>

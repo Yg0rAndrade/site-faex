@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroCarousel from '../components/HeroCarousel.astro';
+import CourseCard from '../components/CourseCard.astro';
+import destaques from '../data/destaques.json';
+import eventos from '../data/eventos.json';
+import noticias from '../data/noticias.json';
+import siteImages from '../data/site-images.json';
+import { courseCategories } from '../data/site';
+
+const proximosEventos = eventos
+  .filter((e) => e.publicado)
+  .sort((a, b) => b.data_evento.localeCompare(a.data_evento))
+  .slice(0, 3);
+
+const fmtData = (d: string) =>
+  new Date(`${d.slice(0, 10)}T12:00:00`).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+---
+
+<Layout>
+  <HeroCarousel />
+
+  <!-- Categorias de cursos -->
+  <section class="relative z-10 mx-auto -mt-12 max-w-7xl px-4">
+    <div data-reveal="stagger" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {courseCategories.slice(0, 4).map((c) => (
+        <a href={`/cursos/${c.slug}`} class="rounded-2xl bg-white p-6 shadow-xl ring-1 ring-slate-200 transition hover:-translate-y-1 hover:ring-faex-orange">
+          <span class="text-sm font-semibold uppercase tracking-wide text-faex-orange">Cursos</span>
+          <h3 class="mt-1 text-xl font-extrabold text-faex-navy">{c.label}</h3>
+          <span class="mt-3 inline-block text-sm font-semibold text-faex-blue">Ver cursos →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Cursos em destaque -->
+  <section class="mx-auto max-w-7xl px-4 py-20">
+    <div data-reveal class="mb-10 flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <span class="font-semibold uppercase tracking-wide text-faex-orange">Nossos cursos</span>
+        <h2 class="mt-2 text-3xl font-extrabold text-faex-navy md:text-4xl">Cursos em destaque</h2>
+      </div>
+      <a href="/cursos" class="font-semibold text-faex-blue hover:underline">Ver todos os cursos →</a>
+    </div>
+    <div data-reveal="stagger" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {destaques.slice(0, 6).map((c) => <CourseCard course={c} />)}
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section class="bg-slate-50 py-20">
+    <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 lg:grid-cols-2">
+      <img data-reveal src={siteImages.faex_foto} alt="Campus da FAEX" class="w-full rounded-3xl object-cover shadow-2xl" loading="lazy" />
+      <div data-reveal>
+        <span class="font-semibold uppercase tracking-wide text-faex-orange">Institucional</span>
+        <h2 class="mt-2 text-3xl font-extrabold text-faex-navy md:text-4xl">Faculdade de Extrema</h2>
+        <p class="mt-5 text-lg leading-relaxed text-slate-600">
+          Cursos de Graduação, Pós-Graduação e Técnicos reconhecidos pelo MEC, em Extrema, Minas Gerais.
+          Aqui você encontra o apoio que precisa para chegar onde quiser.
+        </p>
+        <a href="/sobre" class="mt-8 inline-block rounded-full bg-faex-navy px-7 py-3 font-bold text-white transition hover:bg-faex-blue">Conheça a FAEX</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Eventos -->
+  <section class="mx-auto max-w-7xl px-4 py-20">
+    <div data-reveal class="mb-10 flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <span class="font-semibold uppercase tracking-wide text-faex-orange">Agenda</span>
+        <h2 class="mt-2 text-3xl font-extrabold text-faex-navy md:text-4xl">Eventos</h2>
+      </div>
+      <a href="/eventos" class="font-semibold text-faex-blue hover:underline">Ver todos →</a>
+    </div>
+    <div data-reveal="stagger" class="grid gap-6 md:grid-cols-3">
+      {proximosEventos.map((e) => (
+        <article class="overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-slate-200">
+          <img src={e.imagem_url} alt="" loading="lazy" class="aspect-[16/9] w-full object-cover" />
+          <div class="p-5">
+            <time class="text-sm font-bold text-faex-orange-dark">{fmtData(e.data_evento)}{e.horario && ` · ${e.horario}`}</time>
+            <h3 class="mt-1 text-lg font-bold text-faex-navy">{e.titulo}</h3>
+            <p class="mt-2 line-clamp-3 text-sm text-slate-600">{e.descricao}</p>
+            {e.local && <p class="mt-3 text-xs font-medium text-slate-500">📍 {e.local}</p>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Notícias -->
+  <section class="bg-faex-navy py-20 text-white">
+    <div class="mx-auto max-w-7xl px-4">
+      <div data-reveal class="mb-10">
+        <span class="font-semibold uppercase tracking-wide text-faex-orange">Fique por dentro</span>
+        <h2 class="mt-2 text-3xl font-extrabold md:text-4xl">Notícias</h2>
+      </div>
+      <div data-reveal="stagger" class="grid gap-6 md:grid-cols-2">
+        {noticias.map((n) => (
+          <article class="flex flex-col overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 sm:flex-row">
+            <img src={n.imagem_url} alt="" loading="lazy" class="aspect-video w-full object-cover sm:aspect-auto sm:w-48" />
+            <div class="p-5">
+              <time class="text-xs font-semibold uppercase text-faex-orange">{fmtData(n.created_date)}</time>
+              <h3 class="mt-1 text-lg font-bold">{n.titulo}</h3>
+              <p class="mt-2 text-sm text-white/75">{n.resumo}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Vestibular -->
+  <section class="bg-faex-orange">
+    <div data-reveal class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 py-14 text-center md:flex-row md:text-left">
+      <div>
+        <h2 class="text-3xl font-extrabold text-faex-ink">Vestibular 2027 com inscrições abertas</h2>
+        <p class="mt-2 text-faex-ink/80">Dê o primeiro passo rumo à sua carreira. Seu futuro começa aqui!</p>
+      </div>
+      <a href="/vestibular" class="shrink-0 rounded-full bg-faex-navy px-8 py-4 font-bold text-white transition hover:bg-faex-ink">Tenho interesse</a>
+    </div>
+  </section>
+</Layout>

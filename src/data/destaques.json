@@ -1,0 +1,79 @@
+[
+  {
+    "slug": "excel-aplicado",
+    "nome": "Excel Aplicado à Análise de Dados ",
+    "tipo": "formacao_continuada",
+    "descricao_curta": "Desenvolvimento de competências em Excel para organização, análise e consolidação de dados.",
+    "duracao": "8 horas",
+    "modalidade": "presencial",
+    "imagem_url": "/images/cursos/photo-1552664730-d307excel.png",
+    "vagas_turma": 60,
+    "gratuito": false
+  },
+  {
+    "slug": "administracao",
+    "nome": "Administração",
+    "tipo": "graduacao",
+    "descricao_curta": "Forme-se para liderar empresas e negócios com visão estratégica e habilidades de gestão.",
+    "duracao": "8 semestres · 3.160h",
+    "modalidade": "presencial",
+    "imagem_url": "/images/cursos/photo-1454165804606-c3d57bc86b40.jpg",
+    "vagas_turma": null,
+    "gratuito": false
+  },
+  {
+    "slug": "lideranca-executiva",
+    "nome": "Liderança Executiva – Gestão Estratégica de Equipes e Resultados",
+    "tipo": "formacao_continuada",
+    "descricao_curta": "Desenvolvimento de líderes estratégicos para gestão autônoma, colaborativa e inovadora.",
+    "duracao": "8 horas",
+    "modalidade": "presencial",
+    "imagem_url": "/images/cursos/photo-1552664730-d307lideranca.png",
+    "vagas_turma": 60,
+    "gratuito": false
+  },
+  {
+    "slug": "logistica-para-e-commerce",
+    "nome": "Logística para E-commerce e Gestão de Last Mile",
+    "tipo": "formacao_continuada",
+    "descricao_curta": "Gestão integrada da logística no comércio eletrônico, da armazenagem à entrega.",
+    "duracao": "8 horas",
+    "modalidade": "presencial",
+    "imagem_url": "/images/cursos/photo-1552664730-d307logistica.png",
+    "vagas_turma": 60,
+    "gratuito": false
+  },
+  {
+    "slug": "analise-e-desenvolvimento-de-sistemas",
+    "nome": "Análise e Desenvolvimento de Sistemas",
+    "tipo": "graduacao",
+    "descricao_curta": "Desenvolva soluções digitais e sistemas de software para o mercado de tecnologia.",
+    "duracao": "5 semestres · 2.120h",
+    "modalidade": "presencial",
+    "imagem_url": "/images/cursos/photo-1517694712202-14dd9538aa97.jpg",
+    "vagas_turma": null,
+    "gratuito": false
+  },
+  {
+    "slug": "direito",
+    "nome": "Direito",
+    "tipo": "graduacao",
+    "descricao_curta": "Construa uma carreira sólida na área jurídica com formação completa e prática.",
+    "duracao": "10 semestres · 3.600h",
+    "modalidade": "presencial",
+    "imagem_url": "/images/cursos/photo-1589829545856-d10d557cf95f.jpg",
+    "vagas_turma": null,
+    "gratuito": false
+  },
+  {
+    "slug": "pos-inteligencia-artificial-generativa",
+    "nome": "Pós-Graduação em Inteligência Artificial Generativa",
+    "tipo": "pos_graduacao",
+    "descricao_curta": "Lidere a revolução da IA com LLMs, Prompt Engineering e automações inteligentes.",
+    "duracao": "18 meses",
+    "modalidade": "hibrido",
+    "imagem_url": "/images/cursos/photo-1677442135703-1787eea5ce01.jpg",
+    "vagas_turma": null,
+    "gratuito": false
+  }
+]

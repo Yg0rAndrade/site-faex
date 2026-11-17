@@ -1,0 +1,33 @@
+---
+interface Props {
+  course: {
+    nome: string;
+    slug: string;
+    descricao_curta?: string;
+    duracao?: string;
+    modalidade?: string;
+    imagem_url?: string;
+    novo?: boolean;
+    gratuito?: boolean;
+  };
+}
+const { course } = Astro.props;
+---
+
+<article class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-xl">
+  <div class="relative aspect-[16/10] overflow-hidden">
+    <img src={course.imagem_url} alt="" loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+    <div class="absolute left-3 top-3 flex gap-2">
+      {course.novo && <span class="rounded-full bg-faex-orange px-3 py-1 text-xs font-bold text-faex-ink">Novo</span>}
+      {course.gratuito && <span class="rounded-full bg-emerald-500 px-3 py-1 text-xs font-bold text-white">Gratuito</span>}
+    </div>
+  </div>
+  <div class="flex flex-1 flex-col p-5">
+    <h3 class="text-lg font-bold text-faex-navy">{course.nome.trim()}</h3>
+    {course.descricao_curta && <p class="mt-2 flex-1 text-sm text-slate-600">{course.descricao_curta}</p>}
+    <div class="mt-4 flex flex-wrap gap-2 text-xs font-medium text-slate-500">
+      {course.duracao && <span class="rounded bg-slate-100 px-2 py-1">{course.duracao}</span>}
+      {course.modalidade && <span class="rounded bg-slate-100 px-2 py-1 capitalize">{course.modalidade}</span>}
+    </div>
+  </div>
+</article>

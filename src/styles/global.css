@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* Identidade visual extraída do CSS do site original */
+@theme {
+  --color-faex-navy: #132D6E;
+  --color-faex-navy-dark: #0D2257;
+  --color-faex-ink: #0A1628;
+  --color-faex-blue: #2A5FBB;
+  --color-faex-orange: #F5A623;
+  --color-faex-orange-dark: #D4901E;
+  --color-faex-gold: #FFD06B;
+}
+
+html { scroll-behavior: smooth; }
+body { @apply bg-white text-slate-800 antialiased; }
+
+/* Estado inicial dos elementos animados pelo GSAP (evita "piscar" antes da animação) */
+.js [data-reveal] { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] { opacity: 1; }
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "id": 5,
+    "titulo": "FAEX abre inscrições para Vestibular 2026",
+    "resumo": "As inscrições para o processo seletivo já estão abertas. Não perca essa oportunidade de ingressar na melhor faculdade da região.",
+    "categoria": "institucional",
+    "created_date": "2026-07-01 08:00:00",
+    "imagem_url": "/images/noticias/photo-1540575467063-178a50c2df87.jpg"
+  },
+  {
+    "id": 6,
+    "titulo": "Jornada do Conhecimento",
+    "resumo": "Cursos gratuitos com foco em carreira, inovação e mercado de trabalho. Participe de trilhas de aprendizado com certificação e horas complementares.",
+    "categoria": "academico",
+    "created_date": "2026-02-15 09:00:00",
+    "imagem_url": "/images/noticias/photo-1524178232363-1fb2b075b655.jpg"
+  }
+]

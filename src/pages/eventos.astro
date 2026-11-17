@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import eventos from '../data/eventos.json';
+
+const items = eventos.filter((e) => e.publicado).sort((a, b) => b.data_evento.localeCompare(a.data_evento));
+const fmt = (d: string) => new Date(`${d}T12:00:00`).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+---
+
+<Layout title="Eventos">
+  <PageHeader eyebrow="Agenda" title="Eventos" />
+  <section class="mx-auto max-w-7xl px-4 py-14">
+    <div data-reveal="stagger" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {items.map((e) => (
+        <article class="overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-slate-200">
+          <img src={e.imagem_url} alt="" loading="lazy" class="aspect-[16/9] w-full object-cover" />
+          <div class="p-5">
+            <time class="text-sm font-bold text-faex-orange-dark">{fmt(e.data_evento)}{e.data_fim && ` a ${fmt(e.data_fim)}`}</time>
+            <h2 class="mt-1 text-lg font-bold text-faex-navy">{e.titulo}</h2>
+            <p class="mt-2 text-sm text-slate-600">{e.descricao}</p>
+            {e.local && <p class="mt-3 text-xs font-medium text-slate-500">📍 {e.local}{e.horario && ` · ${e.horario}`}</p>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</Layout>

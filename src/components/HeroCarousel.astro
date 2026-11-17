@@ -1,0 +1,63 @@
+---
+import banners from '../data/banners.json';
+
+const slides = banners
+  .filter((b) => b.ativo)
+  .sort((a, b) => a.ordem - b.ordem)
+  .map((b) => ({
+    ...b,
+    // links relativos da API (ex.: "vestibular") viram rotas do site
+    link: b.link && !/^https?:/.test(b.link) ? `/${b.link.replace(/^\//, '')}` : b.link,
+    link_secundario: b.link_secundario?.replace('https://faex.edu.br', ''),
+  }));
+---
+
+<section data-hero-carousel class="relative h-[78vh] min-h-[520px] overflow-hidden bg-faex-ink" aria-roledescription="carrossel">
+  {slides.map((s, i) => (
+    <div data-slide class="absolute inset-0" style={i > 0 ? 'visibility:hidden;opacity:0' : ''}>
+      <picture>
+        {s.imagem_url_mobile && <source media="(max-width: 767px)" srcset={s.imagem_url_mobile} />}
+        <img
+          src={s.imagem_url}
+          alt=""
+          class="h-full w-full object-cover"
+          loading={i === 0 ? 'eager' : 'lazy'}
+          fetchpriority={i === 0 ? 'high' : 'auto'}
+        />
+      </picture>
+      {!s.sem_texto && (
+        <>
+          <div class="absolute inset-0 bg-gradient-to-r from-faex-ink to-transparent" style={`opacity:${(s.opacidade_overlay ?? 40) / 100 + 0.4}`} />
+          <div class="absolute inset-0 flex items-center">
+            <div data-slide-text class="mx-auto w-full max-w-7xl px-4 text-white">
+              {s.tag && <span class="mb-4 inline-block rounded-full bg-faex-orange/20 px-4 py-1 text-sm font-semibold text-faex-orange">{s.tag}</span>}
+              <h2 class="max-w-2xl text-4xl font-extrabold leading-tight md:text-6xl" set:html={s.titulo} />
+              {s.subtitulo && <p class="mt-4 max-w-xl text-lg text-white/85">{s.subtitulo}</p>}
+              <div class="mt-8 flex flex-wrap gap-3">
+                {s.texto_botao && s.link && (
+                  <a href={s.link} class="rounded-full bg-faex-orange px-7 py-3 font-bold text-faex-ink transition hover:bg-faex-gold">{s.texto_botao}</a>
+                )}
+                {s.texto_botao_secundario && s.link_secundario && (
+                  <a href={s.link_secundario} class="rounded-full border-2 border-white px-7 py-3 font-bold transition hover:bg-white hover:text-faex-navy">{s.texto_botao_secundario}</a>
+                )}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  ))}
+
+  {slides.length > 1 && (
+    <>
+      <button data-prev class="absolute left-4 top-1/2 z-10 hidden -translate-y-1/2 rounded-full bg-white/15 p-3 text-white backdrop-blur hover:bg-white/30 md:block" aria-label="Banner anterior">‹</button>
+      <button data-next class="absolute right-4 top-1/2 z-10 hidden -translate-y-1/2 rounded-full bg-white/15 p-3 text-white backdrop-blur hover:bg-white/30 md:block" aria-label="Próximo banner">›</button>
+      <div class="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+        {slides.map((_, i) => (
+          <button data-dot aria-current={i === 0 ? 'true' : 'false'} aria-label={`Ir para banner ${i + 1}`}
+            class="h-2.5 w-2.5 rounded-full bg-white/50 transition-all aria-[current=true]:w-8 aria-[current=true]:bg-faex-orange" />
+        ))}
+      </div>
+    </>
+  )}
+</section>

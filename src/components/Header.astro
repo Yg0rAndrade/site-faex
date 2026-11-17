@@ -1,0 +1,81 @@
+---
+import { nav, site } from '../data/site';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<header class="sticky top-0 z-50 bg-white text-faex-navy shadow-md">
+  <div class="hidden bg-faex-navy-dark text-xs text-white md:block">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-2">
+      <span class="text-white/70">{site.address}</span>
+      <div class="flex gap-4">
+        <a href={site.phoneHref} class="hover:text-faex-orange">{site.phone}</a>
+        <a href={`mailto:${site.email}`} class="hover:text-faex-orange">{site.email}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3">
+    <a href="/" class="shrink-0">
+      <img src={site.logo} alt="FAEX - Faculdade de Extrema" class="h-11 w-auto md:h-14" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Menu principal">
+      <ul class="flex items-center gap-1">
+        {nav.map((item) => (
+          <li class="group relative">
+            <a
+              href={item.href}
+              class:list={[
+                'block rounded-md px-3 py-2 text-sm font-semibold transition-colors hover:text-faex-orange-dark',
+                isActive(item.href) && 'text-faex-orange-dark',
+              ]}
+            >
+              {item.label}
+              {item.children && <span aria-hidden="true"> ▾</span>}
+            </a>
+            {item.children && (
+              <ul class="invisible absolute left-0 top-full min-w-56 translate-y-2 rounded-lg bg-white py-2 text-slate-700 opacity-0 shadow-xl transition-all group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                {item.children.map((child) => (
+                  <li>
+                    <a href={child.href} class="block px-4 py-2 text-sm hover:bg-slate-100 hover:text-faex-navy">
+                      {child.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a
+      href="/vestibular"
+      class="hidden rounded-full bg-faex-orange px-5 py-2.5 text-sm font-bold text-faex-ink transition hover:bg-faex-gold lg:inline-block"
+    >
+      Vestibular 2027
+    </a>
+
+    <details class="lg:hidden">
+      <summary class="cursor-pointer list-none rounded-md border border-faex-navy/30 px-3 py-2 text-sm font-semibold">Menu</summary>
+      <div class="absolute inset-x-0 top-full max-h-[80vh] overflow-y-auto bg-faex-navy-dark px-4 pb-6 text-white shadow-xl">
+        <ul>
+          {nav.map((item) => (
+            <li class="border-b border-white/10 py-2">
+              <a href={item.href} class="block py-1 font-semibold">{item.label}</a>
+              {item.children && (
+                <ul class="pl-4">
+                  {item.children.map((c) => (
+                    <li><a href={c.href} class="block py-1 text-sm text-white/80">{c.label}</a></li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+        <a href="/vestibular" class="mt-4 block rounded-full bg-faex-orange py-3 text-center font-bold text-faex-ink">Vestibular 2027</a>
+      </div>
+    </details>
+  </div>
+</header>
